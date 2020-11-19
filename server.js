@@ -23,7 +23,7 @@ app.listen(port, function () {
 //
 function handleRate(req, res) {
   const id = Number(req.query.id);
-  calculateRate(res, id);
+  getPerson(res, id);
 }
 
 function getPerson(res, id) {
