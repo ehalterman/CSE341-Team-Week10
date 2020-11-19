@@ -2,8 +2,11 @@ const express = require('express')
 const app = express();
 const path = require('path');
 const port = process.env.PORT || 5000;
-var pg = require('pg');
+var {pg} = require('pg');
 var conString = process.env.DATABASE_URL;
+
+
+const pg = new Pool ({conString: conString});
 
 
 app.use(express.static(__dirname + '/public'));
@@ -13,7 +16,7 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
 
-app.get('/getPerson', handleRate);
+app.get('/getPerson', handlePerson);
 
 // start the server listening
 app.listen(port, function () {
@@ -21,7 +24,7 @@ app.listen(port, function () {
 });
 
 //
-function handleRate(req, res) {
+function handlePerson(req, res) {
   const id = Number(req.query.id);
   getPerson(res, id);
 }
